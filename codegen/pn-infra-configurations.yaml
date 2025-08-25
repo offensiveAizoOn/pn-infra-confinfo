@@ -6,6 +6,8 @@ envs:
         idx: 2 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
       - code: pn-spid-hub
         idx: 3 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+      - code: pn-pdfraster
+        idx: 15 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
     azs: 3
     accounts:
       - code: pn-core
@@ -18,6 +20,113 @@ envs:
           # - Va valorizzato con l'endpoint fornito da postel per contattare il consolidatore
           #to_postel: "none"
           to_postel: "com.amazonaws.vpce.eu-south-1.vpce-svc-01aaf09f48eb7db56"
+        params:
+          pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          pn_cost_anomaly_detection_threshold: "10"
+      - code: pn-postel
+        aws_id: "911845998067"  # Stringhe non numeri
+
+  test:
+    vpcs:
+      - code: pn-confinfo
+        idx: 4 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+      - code: pn-spid-hub
+        idx: 5 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+      - code: pn-pdfraster
+        idx: 16 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+    azs: 3
+    accounts:
+      - code: pn-core
+        base_dns: test.notifichedigitali.it
+        aws_id: "151559006927" # Stringhe non numeri
+      - code: pn-confinfo
+        base_dns: spid.test.notifichedigitali.it
+        aws_id: "771887334808"  # Stringhe non numeri
+        vpcse:
+          # - Va valorizzato con l'endpoint fornito da postel per contattare il consolidatore
+          #to_postel: "none"
+          to_postel: "com.amazonaws.vpce.eu-south-1.vpce-svc-0a03e3680c586118c"
+        params:
+          pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          pn_cost_anomaly_detection_threshold: "10"
+      - code: pn-postel
+        aws_id: "554102482368"  # Stringhe non numeri
+
+  uat:
+    vpcs:
+      - code: pn-confinfo
+        idx: 8 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+      - code: pn-spid-hub
+        idx: 9 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+      - code: pn-pdfraster
+        idx: 17 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+    azs: 3
+    accounts:
+      - code: pn-core
+        base_dns: uat.notifichedigitali.it
+        aws_id: "644374009812" # Stringhe non numeri
+      - code: pn-confinfo
+        base_dns: spid.uat.notifichedigitali.it
+        aws_id: "956319218727"  # Stringhe non numeri
+        vpcse:
+          # - Va valorizzato con l'endpoint fornito da postel per contattare il consolidatore
+          #to_postel: "none"
+          to_postel: "com.amazonaws.vpce.eu-south-1.vpce-svc-01aaf09f48eb7db56"
+        params:
+          pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          pn_cost_anomaly_detection_threshold: "10"
+      - code: pn-postel
+        aws_id: "911845998067"  # Stringhe non numeri
+
+  prod:
+    vpcs:
+      - code: pn-confinfo
+        idx: 11 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+      - code: pn-spid-hub
+        idx: 12 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+      - code: pn-pdfraster
+        idx: 18 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+    azs: 3
+    accounts:
+      - code: pn-core
+        base_dns: notifichedigitali.it
+        aws_id: "510769970275" # Stringhe non numeri
+      - code: pn-confinfo
+        base_dns: spid.notifichedigitali.it
+        aws_id: "350578575906"  # Stringhe non numeri
+        vpcse:
+          # - Va valorizzato con l'endpoint fornito da postel per contattare il consolidatore
+          #to_postel: "none"
+          to_postel: "com.amazonaws.vpce.eu-south-1.vpce-svc-0b01face6c74fe25f"
+        params:
+          pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          pn_cost_anomaly_detection_threshold: "10"
+      - code: pn-postel
+        aws_id: "350387752612"  # Stringhe non numeri
+
+  hotfix:
+    vpcs:
+      - code: pn-confinfo
+        idx: 13 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+      - code: pn-spid-hub
+        idx: 14 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+      - code: pn-pdfraster
+        idx: 19 # Secondo ottetto della VPC, deve essere non sovrapposto con altre VPC di altri ambienti
+    azs: 3
+    accounts:
+      - code: pn-core
+        base_dns: hotfix.notifichedigitali.it
+        aws_id: "207905393513" # Stringhe non numeri
+      - code: pn-confinfo
+        base_dns: spid.hotfix.notifichedigitali.it
+        aws_id: "839620963891"  # Stringhe non numeri
+        vpcse:
+          # - Va valorizzato con l'endpoint fornito da postel per contattare il consolidatore
+          #to_postel: "none"
+          to_postel: "com.amazonaws.vpce.eu-south-1.vpce-svc-01aaf09f48eb7db56"
+        params:
+          pn_cost_anomaly_detection_email: "pn-irt-team@pagopa.it"
+          pn_cost_anomaly_detection_threshold: "10"
       - code: pn-postel
         aws_id: "911845998067"  # Stringhe non numeri
 
@@ -103,7 +212,14 @@ accounts:
             gateway: null
             first_net_ip: 10.<vpc_idx>.50.0
             net_size: 256
-      
+
+          - code: to_pdfraster
+            name: To Pdf Raster
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.60.0
+            net_size: 256
+            export_cidrs: true
+
       - code: pn-spid-hub
         name: PN SpidHub
         primary_cidr: 10.<vpc_idx>.0.0/16
@@ -124,4 +240,55 @@ accounts:
             first_net_ip: 10.<vpc_idx>.40.0
             net_size: 256
           
+      - code: pn-pdfraster
+        name: PN PdfRaster
+        primary_cidr: 10.<vpc_idx>.0.0/16
+        aws_svc:
+          net: aws
+          interfaces_endpoints:
+            - "sqs"
+            - "logs"
+            - "sns"
+            - "kms"
+            - "kinesis-streams"
+            - "elasticloadbalancing"
+            - "events"
+            - "ecr.api"
+            - "ecr.dkr"
+            - "ssmmessages"
+            - "ssm"
+            - "ec2messages"
+            - "ecs-agent"
+            - "ecs-telemetry"
+            - "ecs"
+            - "secretsmanager"
+            - "monitoring"
+            - "xray"
+        networks:
+          - code: public
+            name: Public
+            gateway: 
+              type: igw
+            has_nat: true
+            first_net_ip: 10.<vpc_idx>.1.0
+            net_size: 16
 
+          - code: pdfin
+            name: PdfRaster Ingress
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.3.0
+            net_size: 16
+            nlb: true
+
+          - code: pdfnet
+            name: PdfRaster Private
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.30.0
+            net_size: 256
+            export_cidrs: true
+
+          - code: aws
+            name: AWS Services
+            gateway: null
+            first_net_ip: 10.<vpc_idx>.50.0
+            net_size: 256  

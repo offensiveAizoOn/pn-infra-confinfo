@@ -1,7 +1,7 @@
   
 module "vpc_pn_confinfo" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "3.19.0"
+  version = "5.17.0"
 
   name = var.vpc_pn_confinfo_name
   cidr = var.vpc_pn_confinfo_primary_cidr
@@ -28,6 +28,11 @@ module "vpc_pn_confinfo" {
 
   enable_dhcp_options              = false
 
+  manage_default_network_acl    = false
+  manage_default_route_table    = false
+  manage_default_security_group = false
+  map_public_ip_on_launch       = true
+
   # VPC Flow Logs (Cloudwatch log group and IAM role will be created)
   enable_flow_log                      = false
   create_flow_log_cloudwatch_log_group = false
@@ -47,6 +52,11 @@ resource "aws_security_group" "vpc_pn_confinfo__secgrp_tls" {
   description = "Allow TLS inbound traffic"
   vpc_id      = module.vpc_pn_confinfo.vpc_id
 
+  tags = {
+    "pn-eni-related": "true",
+    "pn-eni-related-groupName-regexp": base64encode("^pn-confinfo_vpc-tls-.*$")
+  }
+  
   ingress {
     description = "TLS from VPC"
     from_port   = 443
@@ -59,7 +69,7 @@ resource "aws_security_group" "vpc_pn_confinfo__secgrp_tls" {
 
 module "vpc_endpoints_pn_confinfo" {
   source = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "3.19.0"
+  version = "5.17.0"
 
   vpc_id             = module.vpc_pn_confinfo.vpc_id
   security_group_ids = [ aws_security_group.vpc_pn_confinfo__secgrp_tls.id ]
@@ -112,6 +122,11 @@ resource "aws_security_group" "vpc_pn_confinfo__secgrp_topostel" {
   description = "Allow traffic to postel"
   vpc_id      = module.vpc_pn_confinfo.vpc_id
 
+  tags = {
+    "pn-eni-related": "true",
+    "pn-eni-related-groupName-regexp": base64encode("^pn-core_vpc-topostel-.*$")
+  }
+
   ingress {
     description = "8080 from VPC"
     from_port   = 8080
@@ -146,7 +161,8 @@ resource "aws_vpc_endpoint" "to_postel" {
 
   security_group_ids = [ aws_security_group.vpc_pn_confinfo__secgrp_topostel.id ]
 
-  subnet_ids          = local.ConfInfo_NlbPostel_SubnetsIds
+  #subnet_ids          = local.ConfInfo_NlbPostel_SubnetsIds
+  subnet_ids          = local.ConfInfo_SubnetsIds
   private_dns_enabled = false
 
   tags                = { Name = "Endpoint to postel"}
